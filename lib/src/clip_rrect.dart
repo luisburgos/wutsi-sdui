@@ -15,6 +15,6 @@ class SDUIClipRRect extends SDUIWidget {
   @override
   Widget toWidget(BuildContext context) => ClipRRect(
       borderRadius:
-          borderRadius == null ? null : BorderRadius.circular(borderRadius!),
+          borderRadius == null ? BorderRadius.zero : BorderRadius.circular(borderRadius!),
       child: child()?.toWidget(context));
 }

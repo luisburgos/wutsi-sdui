@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badge;
 import 'package:flutter/material.dart';
 
 import 'widget.dart';
@@ -16,9 +16,9 @@ class SDUIBadge extends SDUIWidget {
   double? padding;
 
   @override
-  Widget toWidget(BuildContext context) => Badge(
+  Widget toWidget(BuildContext context) => badge.Badge(
         key: id == null ? null : Key(id!),
-        badgeStyle: BadgeStyle(
+        badgeStyle: badge.BadgeStyle(
           elevation: elevation ?? 2,
           badgeColor: toColor(backgroundColor) ?? Colors.red,
           borderRadius: borderRadius == null
@@ -53,25 +53,25 @@ class SDUIBadge extends SDUIWidget {
     return super.fromJson(json);
   }
 
-  BadgeShape _toBadgeShape(String? shape) {
+  badge.BadgeShape _toBadgeShape(String? shape) {
     if (shape?.toLowerCase() == "square") {
-      return BadgeShape.square;
+      return badge.BadgeShape.square;
     }
-    return BadgeShape.circle;
+    return badge.BadgeShape.circle;
   }
 
-  BadgePosition? _toBadgePosition(String? position) {
+  badge.BadgePosition? _toBadgePosition(String? position) {
     switch (position?.toLowerCase()) {
       case "center":
-        return BadgePosition.center();
+        return badge.BadgePosition.center();
       case "topend":
-        return BadgePosition.topEnd();
+        return badge.BadgePosition.topEnd();
       case "topstart":
-        return BadgePosition.topStart();
+        return badge.BadgePosition.topStart();
       case "bottomend":
-        return BadgePosition.bottomEnd();
+        return badge.BadgePosition.bottomEnd();
       case "bottomstart":
-        return BadgePosition.bottomStart();
+        return badge.BadgePosition.bottomStart();
     }
     return null;
   }

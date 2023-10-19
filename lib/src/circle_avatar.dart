@@ -20,7 +20,7 @@ class SDUICircleAvatar extends SDUIWidget {
         backgroundColor: toColor(backgroundColor),
         foregroundColor: toColor(foregroundColor),
         child: ClipRRect(
-          borderRadius: radius != null ? BorderRadius.circular(radius!) : null,
+          borderRadius: radius != null ? BorderRadius.circular(radius!) : BorderRadius.zero,
           child: child()?.toWidget(context),
         ),
       ));
