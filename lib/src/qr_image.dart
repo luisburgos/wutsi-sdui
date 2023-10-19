@@ -22,7 +22,7 @@ class SDUIQrImage extends SDUIWidget {
   double? embeddedImageSize;
 
   @override
-  Widget toWidget(BuildContext context) => QrImage(
+  Widget toWidget(BuildContext context) => QrImageView(
         data: data ?? '',
         version: version ?? QrVersions.auto,
         size: size,
