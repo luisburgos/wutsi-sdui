@@ -1,4 +1,5 @@
 export 'src/action.dart';
+export 'src/action_registry.dart';
 export 'src/analytics.dart';
 export 'src/appbar.dart';
 export 'src/aspect_ratio.dart';

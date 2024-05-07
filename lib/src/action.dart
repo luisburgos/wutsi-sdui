@@ -5,6 +5,7 @@ import 'package:logger/logger.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'action_registry.dart';
 import 'analytics.dart';
 import 'dialog.dart';
 import 'http.dart';
@@ -150,7 +151,16 @@ class SDUIAction {
         return _networkCall(context, data);
 
       default:
-        return _emptyFuture;
+        if (type == null) {
+          return _emptyFuture;
+        }
+
+        final result = SDUIActionRegistry.getInstance().execute(
+          type!,
+          context,
+          data,
+        );
+        return result ?? _emptyFuture;
     }
   }
 
