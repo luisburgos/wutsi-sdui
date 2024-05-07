@@ -51,6 +51,7 @@ class SDUIAction {
   bool inDialog = false;
   String? trackEvent;
   String? trackProductId;
+  String? networkType;
 
   /// controller associated with the action
   PageController? pageController;
@@ -62,6 +63,7 @@ class SDUIAction {
     replacement = attributes?["replacement"] ?? false;
     trackEvent = attributes?["trackEvent"];
     trackProductId = attributes?["trackProductId"];
+    networkType = attributes?["networkType"];
 
     var prompt = attributes?["prompt"];
     if (prompt is Map<String, dynamic>) {
@@ -143,6 +145,9 @@ class SDUIAction {
 
       case 'navigate':
         return _navigate(context);
+
+      case 'network':
+        return _networkCall(context, data);
 
       default:
         return _emptyFuture;
@@ -234,6 +239,19 @@ class SDUIAction {
   Future<String> _executeCommand(
       BuildContext context, Map<String, dynamic>? data) async {
     _logger.i('Execute command $url - data=$data');
+    return await Http.getInstance().post(_urlWithParameters(), data);
+  }
+
+  Future<String> _networkCall(
+    BuildContext context,
+    Map<String, dynamic>? data,
+  ) async {
+    _logger.i('Execute network call $url - data=$data');
+
+    if (networkType != null) {
+      return await Http.getInstance().get(_urlWithParameters());
+    }
+
     return await Http.getInstance().post(_urlWithParameters(), data);
   }
 

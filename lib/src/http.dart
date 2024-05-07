@@ -74,8 +74,17 @@ class Http {
 
   static Http getInstance() => _singleton;
 
+  Future<String> get(String url) async {
+    RequestTemplate request = _pre('GEt', url, null, []);
+    return send(request);
+  }
+
   Future<String> post(String url, Map<String, dynamic>? data) async {
     RequestTemplate request = _pre('POST', url, data, []);
+    return send(request);
+  }
+
+  Future<String> send(RequestTemplate request) async {
     http.Response? response;
     Exception? ex;
     try {
@@ -93,7 +102,7 @@ class Http {
       }
     } finally {
       // Request headers
-      String line = 'POST $url status=${response?.statusCode}';
+      String line = 'POST ${request.url} status=${response?.statusCode}';
       request.headers.forEach((key, value) {
         if (key == 'Authorization') {
           line += ' request_header_Authorization=***';
@@ -110,8 +119,8 @@ class Http {
       }
 
       // Payload
-      if (data != null) {
-        line += ' request_payload=$data';
+      if (request.body != null) {
+        line += ' request_payload=${request.body}';
       }
 
       // Log
